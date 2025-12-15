@@ -1,15 +1,15 @@
 # TP Docker - Clémentine HENAULT
 Nom de l'image docker: clementax/docker_tp-app
 ## Build
-Commande pour build: docker-compose build
+Commande pour build: `docker-compose build`
 
 ## Run
-Commande pour run: docker-compose up    
+Commande pour run: `docker-compose up`  
 
 Lien de l'appli une fois lancée: http://localhost:3000/
 
 ## Scan de l'image: 
-Commande utilisée pour faire le scan : docker scout cves docker_tp-app:latest  
+Commande utilisée pour faire le scan : `docker scout cves docker_tp-app:latest`
 
 Résultat obtenu (extrait):  
 

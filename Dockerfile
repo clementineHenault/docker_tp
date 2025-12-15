@@ -1,18 +1,25 @@
-# Image de base Node.js
-FROM node:18-slim
-
-# Répertoire de travail
+FROM node:lts-trixie-slim AS builder
+# Create app directory
 WORKDIR /app
 
-# Copier les fichiers de dépendances et installer
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 COPY package*.json ./
-RUN npm install
 
-# Copier le reste de l'application
+RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
+
+# Bundle app source
 COPY . .
 
-# Exposer le port de l'application
-EXPOSE 3000
+# Production stage
+FROM node:lts-trixie-slim
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/index.js .
+COPY --from=builder /app/.env .
 
-# Commande pour démarrer l'application
-CMD ["npm", "start"]
+EXPOSE 8080
+CMD [ "node", "index.js" ]

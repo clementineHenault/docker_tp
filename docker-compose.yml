@@ -3,6 +3,7 @@ version: "3.9"
 services:
   app:
     build: .
+    image: docker.io/clementax/docker_tp-app:latest
     container_name: node_app
     ports:
       - "3000:3000"
@@ -13,6 +14,8 @@ services:
     volumes:
       - .:/app
     command: npm start
+    depends_on:
+      - db
 
   db:
     image: postgres:15
